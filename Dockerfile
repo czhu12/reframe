@@ -1,6 +1,6 @@
 # Base node image
-ARG NODE_VERSION=20.3.0
-FROM node:${NODE_VERSION}-slim as base
+ARG NODE_VERSION=22
+FROM node:${NODE_VERSION}-slim AS base
 
 # Set working directory
 WORKDIR /app
@@ -33,7 +33,7 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 # Copy necessary files - modified to ensure all build artifacts are included
 COPY --from=builder /app/build ./build
